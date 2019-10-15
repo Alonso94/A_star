@@ -8,8 +8,10 @@ project(A_star)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
+        roscpp
+        roslib
 )
+find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -115,7 +117,8 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
+        ${catkin_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -147,9 +150,11 @@ add_executable(a_star src/a_star.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(create_map
 ${catkin_LIBRARIES}
+        ${OpenCV_LIBS}
 )
 target_link_libraries(a_star
         ${catkin_LIBRARIES}
+        ${OpenCV_LIBS}
         )
 #############
 ## Install ##
